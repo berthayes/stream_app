@@ -1,0 +1,11 @@
+dest_ip,owner
+208.85.40.0/21,Pandora
+54.224.0.0/12,Amazon
+74.125.0.0/16,Google
+17.0.0.0/8,Apple
+10.100.0.0/24,Bert
+172.224.0.0/12,Akamai
+66.90.128.0/17,Grande
+69.72.128.0/17,FortressITX
+173.194.0.0/16,Google
+224.0.0.0/4,Multicast
