@@ -1,0 +1,72 @@
+<dashboard>
+  <label>Suspicious Traffic</label>
+  <description>Odd Network Traffic.  Unusual stuff.  Outliers.</description>
+  <row>
+    <panel>
+      <table>
+        <title>New MAC Addresses - 4 hours</title>
+        <search>
+          <query>sourcetype=stream:dhcp host=pantroglodyte earliest=-24h  dest_ip!=255.255.255.255 NOT [search sourcetype=stream:dhcp host=pantroglodyte earliest=-24h latest=-4h | stats count by src_mac | fields src_mac | rename src_mac as dest_mac ]   | dedup _time | search opcode=DHCPACK | table  dest_ip dest_mac _time</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Phoning Home - TCP</title>
+        <search>
+          <query>sourcetype="stream:tcp" dest_ip!=10.0.0.0/8 dest_ip!=192.168.0.0/16 dest_ip!=172.16.0.0/12  | streamstats global=f window=2 range(_time) as time_range by src_ip, dest_ip, dest_port | where time_range &gt; 0| stats avg(time_range) as avg, var(time_range) as var, stdev(time_range) as stdev, count by src_ip, dest_ip, dest_port, owner  | iplocation dest_ip | where stdev &lt; (avg*.05) and count &gt; 2 | sort -count</query>
+          <earliest>-60m@m</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Phoning Home - UDP</title>
+        <search>
+          <query>sourcetype="stream:udp" dest_ip!=10.0.0.0/8 dest_ip!=192.168.0.0/16 dest_ip!=172.16.0.0/12  | streamstats global=f window=2 range(_time) as time_range by src_ip, dest_ip, dest_port | where time_range &gt; 0| stats avg(time_range) as avg, var(time_range) as var, stdev(time_range) as stdev, count by src_ip, dest_ip, dest_port, owner  | iplocation dest_ip | where stdev &lt; (avg*.05) and count &gt; 2 | sort -count</query>
+          <earliest>-60m@m</earliest>
+          <latest>now</latest>
+        </search>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <map>
+        <title>Phoning Home -TCP &amp; UDP</title>
+        <search>
+          <query>sourcetype="stream:tcp" OR sourcetype=stream:udp dest_ip!=10.0.0.0/8 dest_ip!=192.168.0.0/16 dest_ip!=172.16.0.0/12  | streamstats global=f window=2 range(_time) as time_range by src_ip, dest_ip, dest_port | where time_range &gt; 0| stats avg(time_range) as avg, var(time_range) as var, stdev(time_range) as stdev, count by src_ip, dest_ip, dest_port, owner | eval remote_socket=dest_ip+":"+dest_port | iplocation dest_ip | where stdev &lt; (avg*.05) and count &gt; 2 | geostats values(count) by remote_socket</query>
+          <earliest>-60m@m</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="mapping.data.maxClusters">100</option>
+        <option name="mapping.drilldown">all</option>
+        <option name="mapping.map.center">(32.99,1.14)</option>
+        <option name="mapping.map.zoom">3</option>
+        <option name="mapping.markerLayer.markerMaxSize">50</option>
+        <option name="mapping.markerLayer.markerMinSize">10</option>
+        <option name="mapping.markerLayer.markerOpacity">0.8</option>
+        <option name="mapping.tileLayer.maxZoom">7</option>
+        <option name="mapping.tileLayer.minZoom">0</option>
+        <option name="drilldown">all</option>
+      </map>
+    </panel>
+  </row>
+</dashboard>

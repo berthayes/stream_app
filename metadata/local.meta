@@ -8,12 +8,12 @@ modtime = 1417037245.916100000
 
 [nav/default]
 version = 6.2.0
-modtime = 1417161346.837558000
+modtime = 1421165587.047535000
 
 [views/network_overview]
 owner = admin
 version = 6.2.0
-modtime = 1417475395.333117000
+modtime = 1421165720.227358000
 
 [lookups/nets.csv]
 access = read : [ * ], write : [ admin, power ]
@@ -36,7 +36,32 @@ modtime = 1417301470.358660000
 
 [transforms/checkip]
 access = read : [ * ], write : [ admin ]
+export = system
+owner = admin
+version = 6.2.0
+modtime = 1420845310.829760000
+
+[views/suspicious_traffic_clone]
+access = read : [ * ], write : [ admin ]
 export = none
 owner = admin
 version = 6.2.0
-modtime = 1417305208.681443000
+modtime = 1421125292.542794000
+
+[views/client_search]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 6.2.0
+modtime = 1421166058.610929000
+
+[views/suspicious_traffic]
+version = 6.2.0
+modtime = 1421162390.575583000
+
+[savedsearches/hostmap_gen]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 6.2.0
+modtime = 1421167310.513153000
