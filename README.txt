@@ -16,14 +16,15 @@ $SPLUNK_HOME/etc/apps/network_profiler/lookups/homenet_hosts.csv
 	This file is used by a saved search (hostmap_gen) that generates a lookup table 
 	that lists MAC address, IP, and hostname.  By default, this search runs every 
 	10 minutes so MAC,IP, andhostname pairings should always be pretty fresh.  If 
-	you can't wait 10 minutes for this search to run on its own, you can run it manually 
-	from Settings->Searches,Reports, and Alerts->hostmap_gen
+	you can't wait 10 minutes for this search to run on its own, you can run it 
+	manually from Settings->Searches,Reports, and Alerts->hostmap_gen
 	This file will need to be maintained as new systems are added to the network.
 
 
 $SPLUNK_HOME/etc/apps/network_profiler/lookups/nets.csv
 	This is a .csv file that maps CIDR blocks to network owners.
-	Also editable by hand until some sort of whois->.csv python magic is crafted (or stolen)
+	Editable by hand until some sort of whois->.csv python magic is crafted 
+	(or stolen)
 	This file will need to be maintained as you identify known networks over time.  
 
 This app was designed to monitor internal LAN traffic as it heads to a border gateway 
