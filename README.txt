@@ -20,5 +20,10 @@ This is a .csv file that maps CIDR blocks to network owners.
 Also editable by hand until some sort of whois->.csv python magic is crafted (or stolen)
 This file will need to be maintained as you identify known networks over time.  
 
+This app was designed to monitor internal LAN traffic as it heads to a border gateway and 
+the Internet beyond.  It also relies on DHCP traffic to map MAC addresses to IP addresses
+and system names, as well as to report on new/unseen systems.  If your border router is not
+also your DHCP server, you will want to watch the wire at two different locations.
+
 
 README.txt continued on back -->
