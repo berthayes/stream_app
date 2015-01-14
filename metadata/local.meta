@@ -16,11 +16,11 @@ version = 6.2.0
 modtime = 1421165720.227358000
 
 [lookups/nets.csv]
-access = read : [ * ], write : [ admin, power ]
-export = none
+access = read : [ * ], write : [ admin ]
+export = system
 owner = nobody
-version = 6.2.0
-modtime = 1417301325.489538000
+version = 6.2.1
+modtime = 1421186407.645759000
 
 [props/stream%3Ahttp/LOOKUP-check]
 version = 6.2.0
@@ -63,5 +63,13 @@ modtime = 1421162390.575583000
 access = read : [ * ], write : [ admin ]
 export = none
 owner = admin
-version = 6.2.0
-modtime = 1421167310.513153000
+version = 6.2.1
+modtime = 1421181913.256808000
+
+[app/install/install_source_checksum]
+version = 6.2.1
+modtime = 1421181760.682659000
+
+[app/install/state]
+version = 6.2.1
+modtime = 1421181764.464701000
