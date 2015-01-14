@@ -1,0 +1,8 @@
+<nav search_view="search" color="#65A637">
+  <view name="search" />
+  <view name="reports" />
+  <view name="alerts" />
+  <view name="client_search" />
+  <view name="network_overview" default='true' />
+  <view name="suspicious_traffic" />
+</nav>
