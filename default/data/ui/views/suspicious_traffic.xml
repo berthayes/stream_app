@@ -6,7 +6,7 @@
       <table>
         <title>New MAC Addresses - 4 hours</title>
         <search>
-          <query>sourcetype=stream:dhcp host=pantroglodyte earliest=-24h  dest_ip!=255.255.255.255 NOT [search sourcetype=stream:dhcp host=pantroglodyte earliest=-24h latest=-4h | stats count by src_mac | fields src_mac | rename src_mac as dest_mac ]   | dedup _time | search opcode=DHCPACK | table  dest_ip dest_mac _time</query>
+          <query>sourcetype=stream:dhcp earliest=-24h  dest_ip!=255.255.255.255 NOT [search sourcetype=stream:dhcp earliest=-24h latest=-4h | stats count by src_mac | fields src_mac | rename src_mac as dest_mac ]   | dedup _time | search opcode=DHCPACK | table  dest_ip dest_mac _time</query>
           <earliest>-24h@h</earliest>
           <latest>now</latest>
         </search>
