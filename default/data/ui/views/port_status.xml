@@ -1,0 +1,53 @@
+<form>
+  <label>Port Status</label>
+  <fieldset submitButton="true">
+    <input type="time" token="field1">
+      <label></label>
+      <default>
+        <earliest>-60m@m</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <title>New Listening Ports</title>
+        <search>
+          <query>sourcetype=stream:tcp src_ip=10.100.0.11 dest_ip=10.0.0.0/8 ack_packets_in!=0  | convert mktime(_time) as starttime | transaction dest_ip dest_port | search NOT [ | inputlookup kvstore_lookup earliest=0] | table dest_ip dest_port _time | sort -dest_ip</query>
+          <earliest>$field1.earliest$</earliest>
+          <latest>$field1.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <input type="time" token="field2">
+        <label></label>
+        <default>
+          <earliest>0</earliest>
+          <latest></latest>
+        </default>
+      </input>
+      <table>
+        <title>Known Ports</title>
+        <search>
+          <query>| inputlookup kvstore_lookup | stats values(dest_port) by dest_ip | lookup hostmap ip as dest_ip</query>
+          <earliest>$field2.earliest$</earliest>
+          <latest>$field2.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+</form>

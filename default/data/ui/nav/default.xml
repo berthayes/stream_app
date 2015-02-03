@@ -5,4 +5,5 @@
   <view name="client_search" />
   <view name="network_overview" default='true' />
   <view name="suspicious_traffic" />
+  <view name="port_status" />
 </nav>

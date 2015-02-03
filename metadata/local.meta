@@ -7,8 +7,8 @@ version = 6.2.0
 modtime = 1417037245.916100000
 
 [nav/default]
-version = 6.2.0
-modtime = 1421165587.047535000
+version = 6.2.1
+modtime = 1422986620.762267000
 
 [views/network_overview]
 owner = admin
@@ -68,8 +68,15 @@ modtime = 1421181913.256808000
 
 [app/install/install_source_checksum]
 version = 6.2.1
-modtime = 1421181760.682659000
+modtime = 1422851027.923807000
 
 [app/install/state]
 version = 6.2.1
 modtime = 1421181764.464701000
+
+[views/port_status]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 6.2.1
+modtime = 1422986546.981645000
