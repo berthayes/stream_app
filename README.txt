@@ -34,4 +34,26 @@ router is not also your DHCP server, you will want to watch the wire at two diff
 locations.
 
 
+This network diagram (Thank you, http://asciiflow.com/) illustrates where I've
+put my tap for this application. A physical tap is not required, you could get
+Stream data from a span port or mirror port, or directly from the host itself.
+
+
+                             10.0.0.0/8          Public IP   +--------------+
+                                +                    +       |              |
+                                |                    |       |              |
+                                |                    |       |              |
++-----------+                   +--------------------+       |              |
+|           |     +-------+     |                    |       |   Internet   |
+|    LAN    +-----+  Tap  +-----+   Firewall/Router  +-------+              |
+|           |     +---+---+     |                    |       |              |
++-----------+         |         +--------------------+       |              |
+              +-------+-------+                              |              |
+              |               |                              |              |
+              |  Splunk App   |                              |              |
+              |  for Stream   |                              +--------------+
+              |               |                                              
+              +---------------+                                              
+
+
 README.txt continued on back -->
