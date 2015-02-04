@@ -171,7 +171,7 @@
       <chart>
         <title>Blocked Ad Servers</title>
         <search>
-          <query>sourcetype=squid src=$src_ip$ squid_request_status=TCP_DENIED http_referrer!="-"  | timechart bins=1000 count(squid_request_status) by dest</query>
+          <query>sourcetype=stream:http src_ip=$src_ip$ http_referrer!="-" | spath http_comment  | search http_comment="HTTP/1.0 403 Forbidden"| spath server | search server=squid | timechart bins=1000 count by site</query>
           <earliest>$field1.earliest$</earliest>
           <latest>$field1.latest$</latest>
         </search>
@@ -198,11 +198,13 @@
         <option name="charting.legend.placement">right</option>
       </chart>
     </panel>
+  </row>
+  <row>
     <panel>
       <chart>
         <title>Blocked Ad Servers by Referer</title>
         <search>
-          <query>sourcetype=squid src=$src_ip$ squid_request_status=TCP_DENIED http_referrer!="-"  | timechart count(squid_request_status) by http_referrer_host</query>
+          <query>sourcetype=stream:http src_ip=$src_ip$ http_referrer!="-"  | spath http_comment   | search http_comment="HTTP/1.0 403 Forbidden" | spath server  | search server=squid  | rex field=http_referrer "//(?P&lt;http_referrer_site&gt;[^/]+)" | timechart count by http_referrer_site</query>
           <earliest>$field1.earliest$</earliest>
           <latest>$field1.latest$</latest>
         </search>

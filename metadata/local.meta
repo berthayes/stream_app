@@ -52,8 +52,8 @@ modtime = 1421125292.542794000
 access = read : [ * ], write : [ admin ]
 export = none
 owner = admin
-version = 6.2.0
-modtime = 1421166058.610929000
+version = 6.2.1
+modtime = 1423030468.603033000
 
 [views/suspicious_traffic]
 version = 6.2.0
@@ -68,7 +68,7 @@ modtime = 1421181913.256808000
 
 [app/install/install_source_checksum]
 version = 6.2.1
-modtime = 1422851027.923807000
+modtime = 1423000338.786703000
 
 [app/install/state]
 version = 6.2.1
